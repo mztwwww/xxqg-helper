@@ -4,7 +4,8 @@ from func.urls import *
 def get_userScore(cookies):
     jar = RequestsCookieJar()
     for cookie in cookies:
-        jar.set(cookie['name'], cookie['value'])
+        if cookie['name'] != "scoreAccessDeny":      #添加的代码
+            jar.set(cookie['name'], cookie['value'])     #缩进修改一下
         
     #获取当前用户总分API
     user_totalScore_json = requests.get(user_totalScore_url, cookies=jar, headers={'Cache-Control': 'no-cache'}).content.decode("utf8")
